@@ -12,6 +12,7 @@ export interface ReminderList {
 }
 function App() {
   const [data, setData] = useState<Reminder[]>([]);
+
   useEffect(() => {
     const loadReminders = async () => {
       const res = await ReminderServices.getReminders();
@@ -22,9 +23,7 @@ function App() {
   const handleDelete = (id: number) => {
     setData(data.filter((item) => item.id !== id));
   };
-  const handleEdit = (id: number) => {
-    console.log(id);
-  };
+
   const addReminder = async (title: string) => {
     // const newReminder:Reminder = await ReminderServices.addReminders(title);
     // console.log(newReminder);
@@ -45,7 +44,7 @@ function App() {
         <Form onAdd={addReminder} />
       </div>
       <div className="min-w-xl px-4">
-        <Table items={data} onDelete={handleDelete} onEdit={handleEdit} />
+        <Table items={data} onDelete={handleDelete} />
       </div>
     </div>
   );
